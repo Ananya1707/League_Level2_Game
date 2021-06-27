@@ -79,7 +79,17 @@ public class GamePanel extends JPanel implements ActionListener    {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		if(currentState == MENU){
+		    updateMenuState();
+		}else if(currentState == GAME){
+		    updateGameState();
+		}else if(currentState == END){
+		    updateEndState();
+		}
 		
+		System.out.println("action");
+		repaint();
+
 	}
 
 }
