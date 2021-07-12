@@ -24,6 +24,8 @@ public class FruitNinja {
 		frame.setSize(WIDTH,HEIGHT);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.addKeyListener(panel);
+
 	}
 
 }

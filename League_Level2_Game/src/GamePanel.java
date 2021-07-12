@@ -5,7 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -17,6 +19,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     Font titleFont;
 	Font instructionsFont;
 	Timer frameDraw;
+	public static BufferedImage image;
+	public static boolean needImage = true;
+	public static boolean gotImage = false;	
+	Knife k = new Knife(400, 450, 50, 50);
+
 
 	
 	GamePanel(){
@@ -25,6 +32,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 	    frameDraw = new Timer(1000/60,this);
 	    frameDraw.start();
+	    
+	    if (needImage) {
+	        loadImage ("background.png");
+	    }
+	   
 	}
 
 	@Override
@@ -67,8 +79,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 	
 	void drawGameState(Graphics g) { 
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, FruitNinja.WIDTH, FruitNinja.HEIGHT);
+		if (gotImage) {
+			g.drawImage(image, 0, 0, FruitNinja.WIDTH, FruitNinja.HEIGHT, null);
+		} else {
+			g.setColor(Color.BLACK);
+			g.fillRect(0, 0, FruitNinja.WIDTH, FruitNinja.HEIGHT);
+		}
+		k.draw(g);
+
 		
 	}
 	
@@ -115,15 +133,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		    System.out.println("UP");
 		}
 		
-		if (e.getKeyCode()==KeyEvent.VK_UP) {
+		if (e.getKeyCode()==KeyEvent.VK_DOWN) {
 		    System.out.println("DOWN");
 		}
 		
-		if (e.getKeyCode()==KeyEvent.VK_UP) {
+		if (e.getKeyCode()==KeyEvent.VK_LEFT) {
 		    System.out.println("LEFT");
 		}
 		
-		if (e.getKeyCode()==KeyEvent.VK_UP) {
+		if (e.getKeyCode()==KeyEvent.VK_RIGHT) {
 		    System.out.println("RIGHT");
 		}
 		
@@ -133,6 +151,18 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	void loadImage(String imageFile) {
+	    if (needImage) {
+	        try {
+	            image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
+		    gotImage = true;
+	        } catch (Exception e) {
+	            
+	        }
+	        needImage = false;
+	    }
 	}
 
 }
