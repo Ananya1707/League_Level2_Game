@@ -5,13 +5,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class GamePanel extends JPanel implements ActionListener, KeyListener {
+public class GamePanel extends JPanel implements ActionListener, KeyListener, MouseMotionListener {
     final int MENU = 0;
     final int GAME = 1;
     final int END = 2;
@@ -21,8 +23,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Timer frameDraw;
 	public static BufferedImage image;
 	public static boolean needImage = true;
-	public static boolean gotImage = false;	
-	Knife k = new Knife(400, 450, 50, 50);
+	public static boolean gotImage = false;		
+	Knife k = new Knife(0,0,100,100);
 
 
 	
@@ -163,6 +165,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	        }
 	        needImage = false;
 	    }
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		k.x = e.getX() - 50;
+		k.y = e.getY() - 70;
+		
 	}
 
 }
