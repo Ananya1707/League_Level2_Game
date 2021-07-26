@@ -25,6 +25,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	public static boolean needImage = true;
 	public static boolean gotImage = false;		
 	Knife k = new Knife(0,0,100,100);
+	ObjectManager m = new ObjectManager(k);
+	Timer orangeSpawn;
+	Timer watermelonSpawn;
+	Timer bananaSpawn;
 
 
 	
@@ -61,6 +65,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	 }
 	
 	void updateGameState() {
+		m.updateOrange();
+		m.updateWatermelon();
+		m.updateBanana();
+
 		
 	}
 	
@@ -87,7 +95,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, FruitNinja.WIDTH, FruitNinja.HEIGHT);
 		}
-		k.draw(g);
+		m.drawOrange(g);
+		m.drawWatermelon(g);
+		m.drawBanana(g);
+
 
 		
 	}
@@ -126,8 +137,19 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 		    if (currentState == END) {
 		        currentState = MENU;
-		    } else {
+		    }
+		        
+		    else if(currentState == GAME) {
+					currentState++;
+					orangeSpawn.stop();
+					watermelonSpawn.stop();
+					bananaSpawn.stop();
+				}
+		    
+		    else {
 		        currentState++;
+				startGame();
+
 		    }
 		}  
 		
@@ -179,6 +201,17 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		k.x = e.getX() - 50;
 		k.y = e.getY() - 70;
 		
+	}
+	
+	void startGame() {
+		orangeSpawn = new Timer(1000 , m);
+	    orangeSpawn.start();
+	    
+	    watermelonSpawn = new Timer(1000 , m);
+	    watermelonSpawn.start();
+	    
+	    bananaSpawn = new Timer(1000 , m);
+	    bananaSpawn.start();
 	}
 
 }

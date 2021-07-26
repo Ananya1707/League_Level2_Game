@@ -10,7 +10,7 @@ public class Orange extends GameObject{
 	public static boolean gotImage = false;
 	
 	Orange(int x, int y, int width, int height) {
-		super(x, y, width, height);
+		super(x, 550, width, height, 3);
 		// TODO Auto-generated constructor stub
 		if (needImage) {
 		    loadImage ("orange.png");
@@ -18,7 +18,12 @@ public class Orange extends GameObject{
 	}
 	
 	void update() {
-		y += speed;
+		if (y < 200) {
+			y+= speed;
+		}
+		if (y >= 200) {
+			y -= speed;
+		}
         super.update();
 
 		
@@ -46,5 +51,7 @@ public class Orange extends GameObject{
 	        needImage = false;
 	    }
 	}
+	
+	
 
 }
