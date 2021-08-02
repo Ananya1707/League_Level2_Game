@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
@@ -13,7 +14,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class GamePanel extends JPanel implements ActionListener, KeyListener, MouseMotionListener {
+public class GamePanel extends JPanel implements ActionListener, KeyListener, MouseMotionListener, MouseListener {
     final int MENU = 0;
     final int GAME = 1;
     final int END = 2;
@@ -26,9 +27,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	public static boolean gotImage = false;		
 	Knife k = new Knife(0,0,100,100);
 	ObjectManager m = new ObjectManager(k);
-	Timer orangeSpawn;
-	Timer watermelonSpawn;
-	Timer bananaSpawn;
+	static Timer orangeSpawn;
+	static Timer watermelonSpawn;
+	static Timer bananaSpawn;
 
 
 	
@@ -68,6 +69,17 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		m.updateOrange();
 		m.updateWatermelon();
 		m.updateBanana();
+		
+		if(!k.isActive) {
+			orangeSpawn.stop();
+			watermelonSpawn.stop();
+			bananaSpawn.stop();
+		}
+		
+		if(k.isActive == false) {
+			currentState = END;
+			
+		}
 
 		
 	}
@@ -200,18 +212,51 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		// TODO Auto-generated method stub
 		k.x = e.getX() - 50;
 		k.y = e.getY() - 70;
+		k.update();
 		
 	}
 	
 	void startGame() {
-		orangeSpawn = new Timer(1000 , m);
+		orangeSpawn = new Timer(2000 , m);
 	    orangeSpawn.start();
 	    
-	    watermelonSpawn = new Timer(1000 , m);
+	    watermelonSpawn = new Timer(7000 , m);
 	    watermelonSpawn.start();
 	    
-	    bananaSpawn = new Timer(1000 , m);
+	    bananaSpawn = new Timer(4000 , m);
 	    bananaSpawn.start();
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		m.checkCollision();
+
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

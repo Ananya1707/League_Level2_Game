@@ -1,3 +1,4 @@
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -8,6 +9,8 @@ public class GameObject {
 	 int height;
 	 int speed;
 	 boolean isActive = true;
+	 Rectangle collisionBox;
+
 	 
 	 GameObject(int x, int y, int width, int height, int speed){
 		 this.x = x;
@@ -15,10 +18,14 @@ public class GameObject {
 		 this.width = width;
 		 this.height = height;
 		 this.speed = speed;
+		 collisionBox = new Rectangle(x, y, width, height);
+
 		 
 	 }
 	 
-	 void update() {
+	 void update(){
+		 collisionBox.setBounds(x, y, width, height);
+
 		 
 	 }
 

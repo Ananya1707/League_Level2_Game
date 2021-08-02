@@ -17,7 +17,6 @@ public class ObjectManager implements ActionListener {
 
 
 
-
 	ObjectManager(Knife knife){
 		k = knife;
 	}
@@ -136,13 +135,55 @@ public class ObjectManager implements ActionListener {
 		}
 	}
 	
+	void checkCollision() {
+		for(int i = 0; i < oranges.size(); i++){
+			Orange orange = oranges.get(i);
+			if(k.collisionBox.intersects(orange.collisionBox)){
+				orange.isActive = false;
+					
+			}
+			
+		}
+		
+		for(int i = 0; i < watermelons.size(); i++){
+			Watermelon watermelon = watermelons.get(i);
+			if(k.collisionBox.intersects(watermelon.collisionBox)){
+				watermelon.isActive = false;
+					
+			}
+			
+		}
+		
+		for(int i = 0; i < bananas.size(); i++){
+			Banana banana = bananas.get(i);
+			if(k.collisionBox.intersects(banana.collisionBox)){
+				banana.isActive = false;
+					
+			}
+			
+		}
+			
+	}
+
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		addOrange();
-		addWatermelon();
-		addBanana();
 		
+		if(e.getSource() == GamePanel.orangeSpawn) {
+			addOrange();
+		
+		}
+		
+		if(e.getSource() == GamePanel.watermelonSpawn) {
+			addWatermelon();
+		
+		}
+		if(e.getSource() == GamePanel.bananaSpawn) {
+			addBanana();
+		
+		}
 	}
 
 }
