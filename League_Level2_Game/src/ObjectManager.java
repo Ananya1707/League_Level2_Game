@@ -9,11 +9,15 @@ public class ObjectManager implements ActionListener {
 	ArrayList<Orange> oranges = new ArrayList<Orange>();
 	ArrayList<Watermelon> watermelons = new ArrayList<Watermelon>();
 	ArrayList<Banana> bananas = new ArrayList<Banana>();
+	ArrayList<Bomb> bombs = new ArrayList<Bomb>();
+
 
 
 	Random random = new Random();
 	Random randomW = new Random();
 	Random randomB = new Random();
+	Random randomBomb = new Random();
+
 
 
 
@@ -162,7 +166,54 @@ public class ObjectManager implements ActionListener {
 			}
 			
 		}
+		
+		for(int i = 0; i < bombs.size(); i++){
+			Bomb bomb = bombs.get(i);
+			if(k.collisionBox.intersects(bomb.collisionBox)){
+				bomb.isActive = false;
+					
+			}
 			
+		}
+			
+	}
+	
+	void addBomb(){
+		bombs.add(new Bomb(randomBomb.nextInt(FruitNinja.WIDTH),0,60,60));
+	
+	}
+	
+	void updateBomb() {
+		for(int i = 0; i < bombs.size(); i++){
+			Bomb bomb = bombs.get(i);
+			//orange.y += 1; 
+			bomb.update();
+			if(bomb.y >= FruitNinja.HEIGHT) {
+				bomb.isActive = false;
+			}
+		}
+		purgeBombObjects();
+
+	}
+	
+	
+	void drawBomb(Graphics g){
+		k.draw(g);
+		
+		for(int i = 0; i < bombs.size(); i++){
+			Bomb bomb = bombs.get(i);
+			bomb.draw(g);
+
+		}	
+	}
+	
+	void purgeBombObjects() {
+		for(int i = 0; i < bombs.size(); i++){
+			Bomb bomb = bombs.get(i);
+			if(bomb.isActive == false) {
+				bombs.remove(i);
+			}
+		}
 	}
 
 	
@@ -182,6 +233,11 @@ public class ObjectManager implements ActionListener {
 		}
 		if(e.getSource() == GamePanel.bananaSpawn) {
 			addBanana();
+		
+		}
+		
+		if(e.getSource() == GamePanel.bombSpawn) {
+			addBomb();
 		
 		}
 	}

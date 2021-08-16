@@ -30,6 +30,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	static Timer orangeSpawn;
 	static Timer watermelonSpawn;
 	static Timer bananaSpawn;
+	static Timer bombSpawn;
+
 
 
 	
@@ -69,11 +71,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		m.updateOrange();
 		m.updateWatermelon();
 		m.updateBanana();
+		m.updateBomb();
+
 		
 		if(!k.isActive) {
 			orangeSpawn.stop();
 			watermelonSpawn.stop();
 			bananaSpawn.stop();
+			bombSpawn.stop();
+
 		}
 		
 		if(k.isActive == false) {
@@ -110,6 +116,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		m.drawOrange(g);
 		m.drawWatermelon(g);
 		m.drawBanana(g);
+		m.drawBomb(g);
+
 
 
 		
@@ -156,6 +164,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 					orangeSpawn.stop();
 					watermelonSpawn.stop();
 					bananaSpawn.stop();
+					bombSpawn.stop();
+
 				}
 		    
 		    else {
@@ -225,6 +235,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	    
 	    bananaSpawn = new Timer(4000 , m);
 	    bananaSpawn.start();
+	    
+	    bombSpawn = new Timer(4000 , m);
+	    bombSpawn.start();
 	}
 
 	@Override
