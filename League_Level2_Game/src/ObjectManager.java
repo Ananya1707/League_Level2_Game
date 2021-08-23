@@ -12,11 +12,13 @@ public class ObjectManager implements ActionListener {
 	ArrayList<Bomb> bombs = new ArrayList<Bomb>();
 
 
-
 	Random random = new Random();
 	Random randomW = new Random();
 	Random randomB = new Random();
 	Random randomBomb = new Random();
+	
+	int score = 0;
+	int strike = 0;
 
 
 
@@ -35,8 +37,9 @@ public class ObjectManager implements ActionListener {
 			Orange orange = oranges.get(i);
 			//orange.y += 1; 
 			orange.update();
-			if(orange.y >= FruitNinja.HEIGHT) {
+			if(orange.y <= 0) {
 				orange.isActive = false;
+				strike += 1;
 			}
 		}
 		purgeOrangeObjects();
@@ -71,10 +74,10 @@ public class ObjectManager implements ActionListener {
 	void updateWatermelon() {
 		for(int i = 0; i < watermelons.size(); i++){
 			Watermelon watermelon = watermelons.get(i);
-			//orange.y += 1; 
 			watermelon.update();
-			if(watermelon.y >= FruitNinja.HEIGHT) {
+			if(watermelon.y <= 0) {
 				watermelon.isActive = false;
+				strike += 1;
 			}
 		}
 		purgeWatermelonObjects();
@@ -111,8 +114,9 @@ public class ObjectManager implements ActionListener {
 			Banana banana = bananas.get(i);
 			//orange.y += 1; 
 			banana.update();
-			if(banana.y >= FruitNinja.HEIGHT) {
+			if(banana.y <= 0) {
 				banana.isActive = false;
+				strike += 1;
 			}
 		}
 		purgeBananaObjects();
@@ -144,6 +148,7 @@ public class ObjectManager implements ActionListener {
 			Orange orange = oranges.get(i);
 			if(k.collisionBox.intersects(orange.collisionBox)){
 				orange.isActive = false;
+				score = score + 7;
 					
 			}
 			
@@ -153,6 +158,7 @@ public class ObjectManager implements ActionListener {
 			Watermelon watermelon = watermelons.get(i);
 			if(k.collisionBox.intersects(watermelon.collisionBox)){
 				watermelon.isActive = false;
+				score = score + 3;
 					
 			}
 			
@@ -162,6 +168,7 @@ public class ObjectManager implements ActionListener {
 			Banana banana = bananas.get(i);
 			if(k.collisionBox.intersects(banana.collisionBox)){
 				banana.isActive = false;
+				score = score + 5;
 					
 			}
 			
@@ -171,6 +178,7 @@ public class ObjectManager implements ActionListener {
 			Bomb bomb = bombs.get(i);
 			if(k.collisionBox.intersects(bomb.collisionBox)){
 				bomb.isActive = false;
+				strike += 1;
 					
 			}
 			

@@ -24,7 +24,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	Timer frameDraw;
 	public static BufferedImage image;
 	public static boolean needImage = true;
-	public static boolean gotImage = false;		
+	public static boolean gotImage = false;	
+	public static BufferedImage image2;
+	public static boolean needImage2 = true;
+	public static boolean gotImage2 = false;
+	public static BufferedImage image3;
+	public static boolean needImage3 = true;
+	public static boolean gotImage3 = false;
+	public static BufferedImage image4;
+	public static boolean needImage4 = true;
+	public static boolean gotImage4 = false;
 	Knife k = new Knife(0,0,100,100);
 	ObjectManager m = new ObjectManager(k);
 	static Timer orangeSpawn;
@@ -44,6 +53,18 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	    
 	    if (needImage) {
 	        loadImage ("background.png");
+	    }
+	    
+	    if (needImage2) {
+	        loadImage2 ("FNxoutline.png");
+	    }
+	    
+	    if (needImage3) {
+	        loadImage3 ("FNxoutline.png");
+	    }
+	    
+	    if (needImage4) {
+	        loadImage4 ("FNxoutline.png");
 	    }
 	   
 	}
@@ -72,6 +93,34 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		m.updateWatermelon();
 		m.updateBanana();
 		m.updateBomb();
+		
+		System.out.println(m.strike);
+		
+		if(m.strike == 1) {
+			needImage2 = true;
+			gotImage2 = false;
+			needImage3 = true;
+			gotImage3 = false;
+			needImage4 = true;
+			gotImage4 = false;
+			
+			if (needImage2) {
+		        loadImage2 ("FNx.png");
+		    }
+		}
+		
+		if(m.strike == 2) {
+			if (needImage3) {
+		        loadImage3 ("FNx.png");
+		    }
+		}
+		
+		if(m.strike == 3) {
+			if (needImage4) {
+		        loadImage4 ("FNx.png");
+		        k.isActive = false;
+		    }
+		}
 
 		
 		if(!k.isActive) {
@@ -99,7 +148,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g.fillRect(0, 0, FruitNinja.WIDTH, FruitNinja.HEIGHT);
 		g.setFont(titleFont);
 		g.setColor(Color.YELLOW);
-		g.drawString("LEAGUE INVADERS", 170, 100);
+		g.drawString("Fruit Ninja", 170, 100);
 		g.setFont(instructionsFont);
 		g.drawString("Press ENTER to start", 280, 270);
 		g.drawString("Press Space for instructions", 250, 350);
@@ -109,6 +158,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	void drawGameState(Graphics g) { 
 		if (gotImage) {
 			g.drawImage(image, 0, 0, FruitNinja.WIDTH, FruitNinja.HEIGHT, null);
+			g.drawImage(image2, 750, 15, 35, 35, null);
+			g.drawImage(image3, 705, 15, 35, 35, null);
+			g.drawImage(image4, 665, 15, 35, 35, null);
+
+			g.setFont(instructionsFont);
+			g.setColor(Color.BLACK);
+			g.drawString("SCORE: " + m.score , 20, 30);
+			
 		} else {
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, FruitNinja.WIDTH, FruitNinja.HEIGHT);
@@ -117,8 +174,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		m.drawWatermelon(g);
 		m.drawBanana(g);
 		m.drawBomb(g);
-
-
 
 		
 	}
@@ -210,6 +265,44 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	        needImage = false;
 	    }
 	}
+	
+	void loadImage2(String imageFile) {
+	    if (needImage2) {
+	        try {
+	            image2 = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
+		    gotImage2 = true;
+	        } catch (Exception e) {
+	            
+	        }
+	        needImage2 = false;
+	    }
+	}
+	
+	void loadImage3(String imageFile) {
+	    if (needImage3) {
+	        try {
+	            image3 = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
+		    gotImage3 = true;
+	        } catch (Exception e) {
+	            
+	        }
+	        needImage3 = false;
+	    }
+	}
+	
+	void loadImage4(String imageFile) {
+	    if (needImage4) {
+	        try {
+	            image4 = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
+		    gotImage4 = true;
+	        } catch (Exception e) {
+	            
+	        }
+	        needImage4 = false;
+	    }
+	}
+
+
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
