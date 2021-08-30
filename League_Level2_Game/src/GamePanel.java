@@ -11,6 +11,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -148,7 +149,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g.fillRect(0, 0, FruitNinja.WIDTH, FruitNinja.HEIGHT);
 		g.setFont(titleFont);
 		g.setColor(Color.YELLOW);
-		g.drawString("Fruit Ninja", 170, 100);
+		g.drawString("Fruit Ninja", 290, 170);
 		g.setFont(instructionsFont);
 		g.drawString("Press ENTER to start", 280, 270);
 		g.drawString("Press Space for instructions", 250, 350);
@@ -181,6 +182,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	void drawEndState(Graphics g)  {
 		g.setColor(Color.RED);
 		g.fillRect(0, 0, FruitNinja.WIDTH, FruitNinja.HEIGHT);
+		g.setFont(titleFont);
+		g.setColor(Color.BLACK);
+		g.drawString("You Lost :(", 290, 170);
+		g.setFont(instructionsFont);
+		g.setColor(Color.BLACK);
+		g.drawString("SCORE: " + m.score , 350, 300);
 		
 	}
 
@@ -230,21 +237,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		    }
 		}  
 		
-		if (e.getKeyCode()==KeyEvent.VK_UP) {
-		    System.out.println("UP");
+		if (e.getKeyCode()==KeyEvent.VK_SPACE) {
+		    JOptionPane.showMessageDialog(null, "Click on the fruits and not the bomb \n Missing a fruit is one strike and clicking a bomb is also on strike \n Once you get 3 strikes the game ends you score is displayed");
 		}
 		
-		if (e.getKeyCode()==KeyEvent.VK_DOWN) {
-		    System.out.println("DOWN");
-		}
 		
-		if (e.getKeyCode()==KeyEvent.VK_LEFT) {
-		    System.out.println("LEFT");
-		}
-		
-		if (e.getKeyCode()==KeyEvent.VK_RIGHT) {
-		    System.out.println("RIGHT");
-		}
 		
 	}
 

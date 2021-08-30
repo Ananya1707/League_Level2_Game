@@ -28,7 +28,7 @@ public class ObjectManager implements ActionListener {
 	}
 	
 	void addOrange(){
-		oranges.add(new Orange(random.nextInt(FruitNinja.WIDTH),0,40,40));
+		oranges.add(new Orange(random.nextInt(FruitNinja.WIDTH - 60),0,40,40));
 	
 	}
 	
@@ -67,7 +67,7 @@ public class ObjectManager implements ActionListener {
 	}
 	
 	void addWatermelon(){
-		watermelons.add(new Watermelon(randomW.nextInt(FruitNinja.WIDTH),0,80,80));
+		watermelons.add(new Watermelon(randomW.nextInt(FruitNinja.WIDTH - 60),0,80,80));
 	
 	}
 	
@@ -105,7 +105,7 @@ public class ObjectManager implements ActionListener {
 	}
 	
 	void addBanana(){
-		bananas.add(new Banana(randomB.nextInt(FruitNinja.WIDTH),0,60,60));
+		bananas.add(new Banana(randomB.nextInt(FruitNinja.WIDTH - 60),0,60,60));
 	
 	}
 	
@@ -187,7 +187,7 @@ public class ObjectManager implements ActionListener {
 	}
 	
 	void addBomb(){
-		bombs.add(new Bomb(randomBomb.nextInt(FruitNinja.WIDTH),0,60,60));
+		bombs.add(new Bomb(randomBomb.nextInt(FruitNinja.WIDTH - 60),0,60,60));
 	
 	}
 	
